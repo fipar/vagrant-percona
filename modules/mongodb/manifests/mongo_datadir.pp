@@ -11,18 +11,18 @@ class mongodb::mongo_datadir {
 			require => Package['xfsprogs'],
 			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 ",
-			unless => "mount | grep '/data/db'";
+			unless => "mount | grep '/var/lib/mongo'";
 		"mkdir_mongo_datadir":
-			command => "mkdir -p /data/db/",
+			command => "mkdir -p /var/lib/mongo/",
 			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 ",
-			unless => "test -d /data/db";
+			unless => "test -d /var/lib/mongo";
 
 	}
 
 
 	mount {
-		"/data/db":
+		"/var/lib/mongo":
 			ensure => "mounted",
 			device => "/dev/$datadir_dev",
 			fstype => "xfs",
