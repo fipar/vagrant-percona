@@ -9,15 +9,12 @@ class mongodb::mongo_datadir {
 		"mkfs_mongo_datadir":
 			command => "mkfs.xfs -f /dev/$datadir_dev",
 			require => Package['xfsprogs'],
-			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
-",
+			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin",
 			unless => "mount | grep '/var/lib/mongo'";
 		"mkdir_mongo_datadir":
 			command => "mkdir -p /var/lib/mongo/",
-			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
-",
-			unless => "test -d /var/lib/mongo";
-
+			path => "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin",
+			unless => "test -d /var/lib/mongo"
 	}
 
 

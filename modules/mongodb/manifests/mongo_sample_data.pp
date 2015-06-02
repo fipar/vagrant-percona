@@ -4,4 +4,9 @@ class mongodb::mongo_sample_data {
 		timeout => 1800, 
 		creates => '/var/lib/mongo/metrics.ns'
 	}
+	exec { 'mongoimport zips.json':
+		command => '/usr/bin/bunzip2 -c /vagrant/sample_data/zips.json.bz2 | /usr/bin/mongoimport --drop --db geo --collection zips --type json',
+		timeout => 1800, 
+		creates => '/var/lib/mongo/geo.ns'
+	}
 }
